@@ -1,8 +1,8 @@
 from tkinter import *
 from fst.fst import auto_complete_fst, read_fst
-from levenshtein.levenshtein import SparseLevenshteinAutomaton
+from levenshtein.classes import SparseLevenshteinAutomaton
 
-class SisBanco:
+class SisAutomaton:
     def __init__(self, master = None):
         self.fst = read_fst()
         self.comandos = []
@@ -39,18 +39,6 @@ class SisBanco:
         self.container8["padx"] = 20
         self.container8["pady"] = 5
         self.container8.pack()
-        self.container9 = Frame(master)
-        self.container9["padx"] = 20
-        self.container9["pady"] = 5
-        self.container9.pack()
-        self.container10 = Frame(master)
-        self.container10["padx"] = 20
-        self.container10["pady"] = 5
-        self.container10.pack()
-        self.container11 = Frame(master)
-        self.container11["padx"] = 20
-        self.container11["pady"] = 5
-        self.container11.pack()
 
         self.titulo = Label(self.container1, text=f'CTC-34')
         self.titulo["font"]= ("Calibri", "9", "bold")
@@ -89,10 +77,15 @@ class SisBanco:
 
     def autocomplete(self, *args):
         self.lblcomplete1["text"] = ""
+        self.lblcomplete1.config(fg= "black")
         self.lblcomplete2["text"] = ""
+        self.lblcomplete2.config(fg= "black")
         self.lblcomplete3["text"] = ""
+        self.lblcomplete3.config(fg= "black")
         self.lblcomplete4["text"] = ""
+        self.lblcomplete4.config(fg= "black")
         self.lblcomplete5["text"] = ""
+        self.lblcomplete5.config(fg= "black")
 
         input = self.txtpalavra.get()
         lista = auto_complete_fst(input, self.fst)
@@ -120,63 +113,6 @@ class SisBanco:
                  self.lblcomplete5.config(fg= "red")
             self.lblcomplete5["text"] = lista[4]
 
-        # while i<5 and i<len(lista):
-        #     locals()["self.lblcomplete" + str(i+1)]["text"] = lista[i]
-        #     i+=1
-            
-
-    # def VerificarSaldo(self):
-    #     verifica = Command.VerificarSaldo(self.cliente)
-    #     saldo_cliente = verifica.execute()
-    #     self.txtsaldo.delete(0, END)
-    #     self.txtsaldo.insert(INSERT, saldo_cliente)
-    #     self.comandos.append("Verificou o saldo")
-    #     self.MostrarHistorico()
-    #     self.lblextrato1["text"] = ""
-    #     self.lblextrato2["text"] = ""
-
-    # def Transferir(self):
-
-    #     valor = self.txttransferencia.get()
-    #     transfere = Command.Transferir(self.cliente, valor)
-    #     transfere.execute()
-
-    #     self.txttransferencia.delete(0, END)
-    #     self.comandos.append(f'transferiu {valor} reais')
-    #     self.MostrarHistorico()
-    #     self.lblextrato1["text"] = ""
-    #     self.lblextrato2["text"] = ""
-    #     self.txtsaldo.delete(0, END)
-
-    # def Receber(self):
-
-    #     valor = self.txtreceber.get()
-    #     recebe = Command.Receber(self.cliente, valor)
-    #     recebe.execute()
-
-
-    #     self.txtreceber.delete(0, END)
-    #     self.comandos.append(f'recebeu {valor} reais')
-    #     self.MostrarHistorico()
-    #     self.lblextrato1["text"] = ""
-    #     self.lblextrato2["text"] = ""
-    #     self.txtsaldo.delete(0, END)
-
-    
-
-    # def MostrarHistorico(self):
-    #     self.lblhistorico1["text"] = "Historico:"
-
-    #     if len(self.comandos)-3 >= 0:
-    #         self.lblhistorico4["text"] =self.comandos[len(self.comandos)-3]
-
-    #     if len(self.comandos)-2 >= 0:
-    #         self.lblhistorico3["text"] =self.comandos[len(self.comandos)-2]
-
-    #     if len(self.comandos)-1 >= 0:
-    #         self.lblhistorico2["text"] =self.comandos[len(self.comandos)-1]
-
-
 root = Tk()
-SisBanco(root)
+SisAutomaton(root)
 root.mainloop()
