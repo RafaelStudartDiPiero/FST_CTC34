@@ -20,7 +20,9 @@ def create_minimal_transducer(dictionary):
     prev_word = ""
     current_word = ""
 
-    for word, index in dictionary.items():
+    index = 1
+
+    for word in dictionary:
         current_word = word
         # print(current_word)
         # Longest Prefix
@@ -61,6 +63,7 @@ def create_minimal_transducer(dictionary):
             missing_output = missing_output - new_output
 
         prev_word = current_word
+        index = index + 1
 
     # Minimizing States for Last Word
     for i in range(len(current_word), 0, -1):
@@ -143,3 +146,8 @@ def auto_complete_fst(input, fst):
                 queue.append((next_state, current_pair[1]+edge['transition']))
 
     return autocomplete_list
+
+
+def read_fst():
+    fst = nx.read_gpickle("generated_fst")
+    return fst

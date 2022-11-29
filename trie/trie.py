@@ -14,7 +14,9 @@ def create_trie(dictionary):
     i += 1
     state0.add_state_to_trie(trie)
 
-    for key, value in dictionary.items():
+    value = 1
+
+    for key in dictionary:
         state = 0
         for idx, letter in enumerate(key):
             current_state_edges = dict(trie[state])
@@ -36,6 +38,7 @@ def create_trie(dictionary):
                 #     f"adicionei a transição {state} para {i} com a letra {letter}")
                 state = i
                 i += 1
+        value = value + 1
 
     return trie
 
@@ -87,3 +90,7 @@ def auto_complete_trie(input, trie):
             queue.append((next_state, tupla[1]+edge_properties['transition']))
 
     return autocomplete_list
+
+def read_trie():
+    trie = nx.read_gpickle("generated_trie")
+    return trie
