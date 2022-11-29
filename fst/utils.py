@@ -18,7 +18,7 @@ def findMinimizedState(state, minimal_states, max_word_size):
 
 def findMaxWordSize(dictionary):
     max_word_size = 0
-    for word in dictionary.keys():
+    for word in dictionary:
         if len(word) > max_word_size:
             max_word_size = len(word)
     return max_word_size
